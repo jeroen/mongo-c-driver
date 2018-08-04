@@ -1,0 +1,15 @@
+services:
+  - mongodb
+
+environment:
+  PATH: C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Program Files\Git\cmd
+  matrix:
+    - MINGW_INSTALLS: mingw32
+    - MINGW_INSTALLS: mingw64
+
+matrix:
+  fast_finish: true
+
+build_script:
+  - C:\msys64\usr\bin\pacman --noconfirm --ask 20 --sync --refresh --refresh --sysupgrade --sysupgrade
+  - C:\msys64\usr\bin\bash --login -c "$(cygpath ${APPVEYOR_BUILD_FOLDER})/msys2-build.sh"
